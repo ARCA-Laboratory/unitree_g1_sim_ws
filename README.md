@@ -75,7 +75,9 @@ cd ~/unitree_g1_sim_ws
 ./scripts/setup_environment.sh
 
 # Option B: Manual install (if ROS 2 Humble is already installed)
-pip3 install --user mujoco mujoco-python-viewer gymnasium pyyaml
+sudo apt install ros-humble-xacro ros-humble-joint-state-publisher-gui ros-humble-rmw-cyclonedds-cpp
+pip3 install --user mujoco gymnasium pyyaml
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 ```
 
 ### 2. Build the Workspace
