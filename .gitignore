@@ -1,0 +1,20 @@
+# Official Unitree repos (clone separately)
+src/unitree_mujoco/
+src/unitree_ros/
+src/unitree_sdk2/
+
+# Build artifacts
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# IDE/tool settings
+.claude/
+.vscode/
+*.log
+MUJOCO_LOG.TXT

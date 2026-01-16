@@ -1,0 +1,25 @@
+# G1 Simulation Parameters
+
+g1_mujoco_simulator:
+  ros__parameters:
+    # Simulation settings
+    sim_rate: 500.0      # Hz - MuJoCo simulation rate
+    publish_rate: 100.0  # Hz - ROS topic publish rate
+    use_viewer: true     # Show MuJoCo viewer window
+    paused: false        # Start paused
+
+    # Physics settings (these are set in MuJoCo XML but can be overridden)
+    timestep: 0.002      # 2ms = 500Hz
+
+    # Control gains (PD controller)
+    kp: 100.0            # Position gain
+    kd: 10.0             # Velocity gain
+
+joint_command_publisher:
+  ros__parameters:
+    mode: "standing"     # standing, wave, squat, arms_up
+    rate: 50.0           # Hz
+
+robot_state_publisher:
+  ros__parameters:
+    use_sim_time: true
