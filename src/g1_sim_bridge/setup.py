@@ -29,6 +29,7 @@ setup(
             'mujoco_ros2_bridge = g1_sim_bridge.mujoco_ros2_bridge:main',
             'joint_command_publisher = g1_sim_bridge.joint_command_publisher:main',
             'keyboard_teleop = g1_sim_bridge.keyboard_teleop:main',
+            'balance_controller = g1_sim_bridge.balance_controller:main',
         ],
     },
 )

@@ -110,7 +110,7 @@ ros2 launch g1_sim_bringup g1_sim.launch.py
 Each mode is self-contained - just pick one:
 
 ```bash
-# Basic simulation with MuJoCo viewer + RViz
+# Basic simulation with MuJoCo viewer + RViz (fixed base)
 ./scripts/run_sim.sh sim
 
 # Demo with wave motion
@@ -118,6 +118,9 @@ Each mode is self-contained - just pick one:
 
 # Demo with squat motion
 ./scripts/run_sim.sh squat
+
+# Balance controller demo (experimental - floating base)
+./scripts/run_sim.sh balance
 
 # Headless mode (no GUI)
 ./scripts/run_sim.sh headless

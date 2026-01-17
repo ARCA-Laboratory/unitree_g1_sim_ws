@@ -18,16 +18,18 @@ print_usage() {
     echo "Usage: $0 [command]"
     echo ""
     echo "Commands:"
-    echo "  sim       - Run basic simulation with MuJoCo viewer and RViz"
+    echo "  sim       - Run basic simulation with MuJoCo viewer and RViz (fixed base)"
     echo "  demo      - Run simulation with demo motions (wave by default)"
     echo "  wave      - Run simulation with wave demo"
     echo "  squat     - Run simulation with squat demo"
+    echo "  balance   - Run simulation with balance controller (floating base)"
     echo "  teleop    - Run simulation (then start teleop separately)"
     echo "  rviz      - Launch only RViz for visualization"
     echo "  headless  - Run simulation without any GUI"
     echo ""
     echo "Examples:"
     echo "  $0 sim"
+    echo "  $0 balance"
     echo "  $0 demo wave"
     echo ""
 }
@@ -74,6 +76,11 @@ main() {
         squat)
             echo -e "${GREEN}Starting G1 squat demo...${NC}"
             ros2 launch g1_sim_bringup g1_demo.launch.py mode:=squat
+            ;;
+        balance)
+            echo -e "${GREEN}Starting G1 with balance controller (experimental)...${NC}"
+            echo -e "${YELLOW}Note: Simple PD balance - robot may still fall${NC}"
+            ros2 launch g1_sim_bringup g1_balance.launch.py
             ;;
         teleop)
             echo -e "${GREEN}Starting G1 simulation...${NC}"
