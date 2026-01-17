@@ -34,6 +34,7 @@ def generate_launch_description():
     use_rviz = LaunchConfiguration('use_rviz')
     use_viewer = LaunchConfiguration('use_viewer')
     headless = LaunchConfiguration('headless')
+    fixed_base = LaunchConfiguration('fixed_base')
 
     return LaunchDescription([
         # Declare arguments
@@ -57,6 +58,11 @@ def generate_launch_description():
             default_value='false',
             description='Run in headless mode (no viewer, no RViz)'
         ),
+        DeclareLaunchArgument(
+            'fixed_base',
+            default_value='true',
+            description='Pin robot base (true=stable, false=floating/requires balance controller)'
+        ),
 
         # Robot State Publisher
         Node(
@@ -79,6 +85,7 @@ def generate_launch_description():
             parameters=[{
                 'use_sim_time': use_sim_time,
                 'use_viewer': use_viewer,
+                'fixed_base': fixed_base,
                 'sim_rate': 500.0,
                 'publish_rate': 100.0,
             }]
