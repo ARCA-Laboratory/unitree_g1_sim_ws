@@ -107,6 +107,8 @@ ros2 launch g1_sim_bringup g1_sim.launch.py
 
 ### Running Different Modes
 
+Each mode is self-contained - just pick one:
+
 ```bash
 # Basic simulation with MuJoCo viewer + RViz
 ./scripts/run_sim.sh sim
@@ -120,13 +122,13 @@ ros2 launch g1_sim_bringup g1_sim.launch.py
 # Headless mode (no GUI)
 ./scripts/run_sim.sh headless
 
-# RViz only (with joint_state_publisher_gui)
+# RViz only (with joint_state_publisher_gui, no MuJoCo)
 ./scripts/run_sim.sh rviz
 ```
 
 ### Keyboard Teleoperation
 
-In one terminal, start the simulation:
+In one terminal, start the basic simulation:
 ```bash
 ros2 launch g1_sim_bringup g1_sim.launch.py
 ```
