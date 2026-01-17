@@ -67,7 +67,7 @@ class G1MuJoCoSimulator(Node):
         self.declare_parameter('publish_rate', 100.0)  # 100 Hz publishing
         self.declare_parameter('use_viewer', True)
         self.declare_parameter('paused', False)
-        self.declare_parameter('fixed_base', False)  # Set True to pin robot for testing
+        self.declare_parameter('fixed_base', True)  # True=pinned (stable), False=floating (requires balance controller)
 
         # Get parameters
         model_path = self.get_parameter('model_path').get_parameter_value().string_value

@@ -191,6 +191,24 @@ ros2 launch g1_sim_bringup g1_demo.launch.py mode:=wave
 # Available modes: standing, wave, squat, arms_up
 ```
 
+## Simulation Modes
+
+### Fixed Base (default)
+By default, the robot's pelvis is pinned in place (`fixed_base:=true`). This is stable and useful for:
+- Testing joint movements and arm motions
+- Visualizing robot kinematics
+- Developing motion primitives
+- ROS 2 integration testing
+
+### Floating Base (experimental)
+```bash
+ros2 launch g1_sim_bringup g1_sim.launch.py fixed_base:=false
+```
+⚠️ **Note:** Floating base mode requires an active balance controller to prevent the robot from falling. This simulation does not include a balance controller - the robot will fall without one. For proper humanoid balancing, consider:
+- Using Unitree's official control SDK
+- Implementing a ZMP/COM balance controller
+- Using reinforcement learning-based controllers
+
 ## ROS 2 Topics
 
 ### Published Topics
