@@ -205,12 +205,21 @@ By default, the robot's pelvis is pinned in place (`fixed_base:=true`). This is 
 
 ### Floating Base (experimental)
 ```bash
+# Basic floating base (robot will fall)
 ros2 launch g1_sim_bringup g1_sim.launch.py fixed_base:=false
+
+# With simple PD balance controller (robot will still fall - demo only)
+./scripts/run_sim.sh balance
 ```
-⚠️ **Note:** Floating base mode requires an active balance controller to prevent the robot from falling. This simulation does not include a balance controller - the robot will fall without one. For proper humanoid balancing, consider:
-- Using Unitree's official control SDK
-- Implementing a ZMP/COM balance controller
-- Using reinforcement learning-based controllers
+⚠️ **Note:** Floating base mode requires a sophisticated balance controller. The included PD balance controller is a **demonstration only** - it cannot keep the robot upright. Humanoid balancing requires:
+- **Predictive control** (MPC) that anticipates future states
+- **Full-body dynamics** accounting for all limb movements
+- **ZMP/COM tracking** to keep balance within support polygon
+
+For actual walking/balancing, use:
+- [unitree_rl_gym](https://github.com/unitreerobotics/unitree_rl_gym) - Pre-trained G1 RL policies
+- [unitree_rl_lab](https://github.com/unitreerobotics/unitree_rl_lab) - IsaacLab-based training
+- [MuJoCo MPC](https://github.com/google-deepmind/mujoco_mpc) - Model predictive control
 
 ## ROS 2 Topics
 
