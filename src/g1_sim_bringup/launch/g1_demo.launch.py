@@ -27,7 +27,7 @@ def generate_launch_description():
             os.path.join(g1_sim_bringup_dir, 'launch', 'g1_sim.launch.py')
         ),
         launch_arguments={
-            'use_sim_time': 'true',
+            'use_sim_time': 'false',
             'use_rviz': 'true',
             'use_viewer': 'true',
         }.items()
