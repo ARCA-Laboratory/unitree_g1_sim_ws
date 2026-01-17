@@ -90,8 +90,20 @@ class G1MuJoCoSimulator(Node):
         # Simulation timestep
         self.model.opt.timestep = 1.0 / self.sim_rate
 
-        # Define standing pose - all zeros for straight standing
-        self.standing_pose = np.zeros(len(self.JOINT_NAMES))
+        # Define standing pose with bent knees for balance
+        # Joint order: waist(3), left_arm(7), right_arm(7), left_leg(6), right_leg(6)
+        self.standing_pose = np.array([
+            # Waist (3): yaw, roll, pitch
+            0.0, 0.0, 0.0,
+            # Left Arm (7): shoulder_pitch, shoulder_roll, shoulder_yaw, elbow, wrist_yaw, wrist_roll, wrist_pitch
+            0.0, 0.2, 0.0, -0.3, 0.0, 0.0, 0.0,
+            # Right Arm (7): shoulder_pitch, shoulder_roll, shoulder_yaw, elbow, wrist_yaw, wrist_roll, wrist_pitch
+            0.0, -0.2, 0.0, 0.3, 0.0, 0.0, 0.0,
+            # Left Leg (6): hip_yaw, hip_roll, hip_pitch, knee, ankle_pitch, ankle_roll
+            0.0, 0.0, -0.4, 0.8, -0.4, 0.0,
+            # Right Leg (6): hip_yaw, hip_roll, hip_pitch, knee, ankle_pitch, ankle_roll
+            0.0, 0.0, -0.4, 0.8, -0.4, 0.0,
+        ])
 
         # Joint command storage - initialize to standing pose
         self.joint_commands = self.standing_pose.copy()
@@ -192,8 +204,8 @@ class G1MuJoCoSimulator(Node):
             <option timestep="0.002" iterations="50" solver="Newton" tolerance="1e-10" gravity="0 0 -9.81"/>
 
             <default>
-                <joint damping="5" armature="0.1"/>
-                <geom friction="1.0 0.5 0.5" margin="0.001"/>
+                <joint damping="10" armature="0.1"/>
+                <geom friction="1.5 0.5 0.5" margin="0.001"/>
                 <position kp="100" ctrlrange="-3.14 3.14" ctrllimited="true"/>
             </default>
 
@@ -423,21 +435,21 @@ class G1MuJoCoSimulator(Node):
                 <position name="right_wrist_roll_motor" joint="right_wrist_roll_joint" kp="50"/>
                 <position name="right_wrist_pitch_motor" joint="right_wrist_pitch_joint" kp="50"/>
 
-                <!-- Left Leg -->
-                <position name="left_hip_yaw_motor" joint="left_hip_yaw_joint" kp="300"/>
-                <position name="left_hip_roll_motor" joint="left_hip_roll_joint" kp="300"/>
-                <position name="left_hip_pitch_motor" joint="left_hip_pitch_joint" kp="400"/>
-                <position name="left_knee_motor" joint="left_knee_joint" kp="400"/>
-                <position name="left_ankle_pitch_motor" joint="left_ankle_pitch_joint" kp="200"/>
-                <position name="left_ankle_roll_motor" joint="left_ankle_roll_joint" kp="200"/>
+                <!-- Left Leg - high gains for standing balance -->
+                <position name="left_hip_yaw_motor" joint="left_hip_yaw_joint" kp="500"/>
+                <position name="left_hip_roll_motor" joint="left_hip_roll_joint" kp="500"/>
+                <position name="left_hip_pitch_motor" joint="left_hip_pitch_joint" kp="800"/>
+                <position name="left_knee_motor" joint="left_knee_joint" kp="800"/>
+                <position name="left_ankle_pitch_motor" joint="left_ankle_pitch_joint" kp="400"/>
+                <position name="left_ankle_roll_motor" joint="left_ankle_roll_joint" kp="400"/>
 
-                <!-- Right Leg -->
-                <position name="right_hip_yaw_motor" joint="right_hip_yaw_joint" kp="300"/>
-                <position name="right_hip_roll_motor" joint="right_hip_roll_joint" kp="300"/>
-                <position name="right_hip_pitch_motor" joint="right_hip_pitch_joint" kp="400"/>
-                <position name="right_knee_motor" joint="right_knee_joint" kp="400"/>
-                <position name="right_ankle_pitch_motor" joint="right_ankle_pitch_joint" kp="200"/>
-                <position name="right_ankle_roll_motor" joint="right_ankle_roll_joint" kp="200"/>
+                <!-- Right Leg - high gains for standing balance -->
+                <position name="right_hip_yaw_motor" joint="right_hip_yaw_joint" kp="500"/>
+                <position name="right_hip_roll_motor" joint="right_hip_roll_joint" kp="500"/>
+                <position name="right_hip_pitch_motor" joint="right_hip_pitch_joint" kp="800"/>
+                <position name="right_knee_motor" joint="right_knee_joint" kp="800"/>
+                <position name="right_ankle_pitch_motor" joint="right_ankle_pitch_joint" kp="400"/>
+                <position name="right_ankle_roll_motor" joint="right_ankle_roll_joint" kp="400"/>
             </actuator>
 
             <sensor>

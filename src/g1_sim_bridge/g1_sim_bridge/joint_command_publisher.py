@@ -36,7 +36,7 @@ class JointCommandPublisher(Node):
         'right_knee_joint', 'right_ankle_pitch_joint', 'right_ankle_roll_joint',
     ]
 
-    # Standing pose (default)
+    # Standing pose with bent knees for balance
     STANDING_POSE = {
         # Waist
         'waist_yaw_joint': 0.0,
@@ -44,7 +44,7 @@ class JointCommandPublisher(Node):
         'waist_pitch_joint': 0.0,
         # Left Arm (relaxed at sides)
         'left_shoulder_pitch_joint': 0.0,
-        'left_shoulder_roll_joint': 0.1,
+        'left_shoulder_roll_joint': 0.2,
         'left_shoulder_yaw_joint': 0.0,
         'left_elbow_joint': -0.3,
         'left_wrist_yaw_joint': 0.0,
@@ -52,25 +52,25 @@ class JointCommandPublisher(Node):
         'left_wrist_pitch_joint': 0.0,
         # Right Arm (relaxed at sides)
         'right_shoulder_pitch_joint': 0.0,
-        'right_shoulder_roll_joint': -0.1,
+        'right_shoulder_roll_joint': -0.2,
         'right_shoulder_yaw_joint': 0.0,
         'right_elbow_joint': 0.3,
         'right_wrist_yaw_joint': 0.0,
         'right_wrist_roll_joint': 0.0,
         'right_wrist_pitch_joint': 0.0,
-        # Left Leg (standing)
+        # Left Leg (bent knee stance)
         'left_hip_yaw_joint': 0.0,
         'left_hip_roll_joint': 0.0,
-        'left_hip_pitch_joint': -0.3,
-        'left_knee_joint': 0.6,
-        'left_ankle_pitch_joint': -0.3,
+        'left_hip_pitch_joint': -0.4,
+        'left_knee_joint': 0.8,
+        'left_ankle_pitch_joint': -0.4,
         'left_ankle_roll_joint': 0.0,
-        # Right Leg (standing)
+        # Right Leg (bent knee stance)
         'right_hip_yaw_joint': 0.0,
         'right_hip_roll_joint': 0.0,
-        'right_hip_pitch_joint': -0.3,
-        'right_knee_joint': 0.6,
-        'right_ankle_pitch_joint': -0.3,
+        'right_hip_pitch_joint': -0.4,
+        'right_knee_joint': 0.8,
+        'right_ankle_pitch_joint': -0.4,
         'right_ankle_roll_joint': 0.0,
     }
 
