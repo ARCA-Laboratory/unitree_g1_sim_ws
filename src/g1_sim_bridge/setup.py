@@ -16,6 +16,8 @@ setup(
         (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
         # Install config files
         (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
+        # Install model files
+        (os.path.join('share', package_name, 'models'), glob('models/*.pt')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -30,6 +32,7 @@ setup(
             'joint_command_publisher = g1_sim_bridge.joint_command_publisher:main',
             'keyboard_teleop = g1_sim_bridge.keyboard_teleop:main',
             'balance_controller = g1_sim_bridge.balance_controller:main',
+            'rl_locomotion = g1_sim_bridge.rl_locomotion:main',
         ],
     },
 )

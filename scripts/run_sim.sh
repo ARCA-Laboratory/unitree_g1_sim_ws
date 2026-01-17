@@ -23,6 +23,7 @@ print_usage() {
     echo "  wave      - Run simulation with wave demo"
     echo "  squat     - Run simulation with squat demo"
     echo "  balance   - Run simulation with balance controller (floating base)"
+    echo "  walk      - Run RL locomotion with pre-trained policy (experimental)"
     echo "  teleop    - Run simulation (then start teleop separately)"
     echo "  rviz      - Launch only RViz for visualization"
     echo "  headless  - Run simulation without any GUI"
@@ -81,6 +82,11 @@ main() {
             echo -e "${GREEN}Starting G1 with balance controller (experimental)...${NC}"
             echo -e "${YELLOW}Note: Simple PD balance - robot may still fall${NC}"
             ros2 launch g1_sim_bringup g1_balance.launch.py
+            ;;
+        walk)
+            echo -e "${GREEN}Starting G1 with RL locomotion policy...${NC}"
+            echo -e "${YELLOW}Using pre-trained policy from unitree_rl_gym${NC}"
+            ros2 run g1_sim_bridge rl_locomotion
             ;;
         teleop)
             echo -e "${GREEN}Starting G1 simulation...${NC}"
