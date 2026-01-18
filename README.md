@@ -77,6 +77,7 @@ cd ~/unitree_g1_sim_ws
 # Option B: Manual install (if ROS 2 Humble is already installed)
 sudo apt install ros-humble-xacro ros-humble-joint-state-publisher-gui ros-humble-rmw-cyclonedds-cpp
 pip3 install --user mujoco gymnasium pyyaml
+pip3 install --user torch  # Required for RL walking mode
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 ```
 
@@ -121,6 +122,9 @@ Each mode is self-contained - just pick one:
 
 # Balance controller demo (experimental - floating base)
 ./scripts/run_sim.sh balance
+
+# RL-based walking with pre-trained policy
+./scripts/run_sim.sh walk
 
 # Headless mode (no GUI)
 ./scripts/run_sim.sh headless
@@ -211,12 +215,37 @@ ros2 launch g1_sim_bringup g1_sim.launch.py fixed_base:=false
 # With simple PD balance controller (robot will still fall - demo only)
 ./scripts/run_sim.sh balance
 ```
-⚠️ **Note:** Floating base mode requires a sophisticated balance controller. The included PD balance controller is a **demonstration only** - it cannot keep the robot upright. Humanoid balancing requires:
-- **Predictive control** (MPC) that anticipates future states
-- **Full-body dynamics** accounting for all limb movements
-- **ZMP/COM tracking** to keep balance within support polygon
+⚠️ **Note:** Floating base mode requires a sophisticated balance controller. The included PD balance controller is a **demonstration only** - it cannot keep the robot upright.
 
-For actual walking/balancing, use:
+### RL-Based Walking
+```bash
+# Run with pre-trained RL policy (requires PyTorch)
+pip3 install torch  # One-time setup
+./scripts/run_sim.sh walk
+```
+
+This mode uses a **pre-trained reinforcement learning policy** from [unitree_rl_gym](https://github.com/unitreerobotics/unitree_rl_gym) to make the G1 walk. It runs a 12-DOF leg controller at 50Hz with:
+- MuJoCo viewer showing the physics simulation
+- RViz showing the full URDF model synchronized with the simulation
+- Interactive keyboard control for velocity commands
+- Robot starts in standing mode
+
+The RL policy controls only the leg joints (12 DOF), while upper body joints remain fixed.
+
+**RL Walking Keyboard Controls:**
+| Key | Action |
+|-----|--------|
+| W/S | Walk forward/backward |
+| A/D | Turn left/right |
+| Q/E | Strafe left/right |
+| SPACE | Stop (stand in place) |
+| R | Reset to default forward walk |
+| +/- | Increase/decrease speed |
+| H | Show help |
+| ESC | Quit |
+
+### Additional Resources
+For training your own policies or using more advanced control:
 - [unitree_rl_gym](https://github.com/unitreerobotics/unitree_rl_gym) - Pre-trained G1 RL policies
 - [unitree_rl_lab](https://github.com/unitreerobotics/unitree_rl_lab) - IsaacLab-based training
 - [MuJoCo MPC](https://github.com/google-deepmind/mujoco_mpc) - Model predictive control

@@ -33,6 +33,7 @@ setup(
             'keyboard_teleop = g1_sim_bridge.keyboard_teleop:main',
             'balance_controller = g1_sim_bridge.balance_controller:main',
             'rl_locomotion = g1_sim_bridge.rl_locomotion:main',
+            'rl_keyboard_teleop = g1_sim_bridge.rl_keyboard_teleop:main',
         ],
     },
 )

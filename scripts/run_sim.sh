@@ -86,7 +86,15 @@ main() {
         walk)
             echo -e "${GREEN}Starting G1 with RL locomotion policy...${NC}"
             echo -e "${YELLOW}Using pre-trained policy from unitree_rl_gym${NC}"
-            ros2 run g1_sim_bridge rl_locomotion
+            echo ""
+            # Launch simulation in background, then run keyboard teleop in foreground
+            ros2 launch g1_sim_bringup g1_walk.launch.py &
+            LAUNCH_PID=$!
+            sleep 2  # Wait for nodes to start
+            echo -e "${GREEN}Starting keyboard teleop...${NC}"
+            ros2 run g1_sim_bridge rl_keyboard_teleop
+            # When teleop exits, kill the launch
+            kill $LAUNCH_PID 2>/dev/null
             ;;
         teleop)
             echo -e "${GREEN}Starting G1 simulation...${NC}"
